@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return response()->json([
-        'message' => ['Aviailable routes:','POST /modules','GET /modules/{id}/download']
+        'routes' => ['POST /modules','GET /modules/{id}/download']
     ]);
 });
 Route::post('/modules', [App\Http\Controllers\ModuleController::class, 'createModule']);
