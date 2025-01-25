@@ -3,6 +3,5 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+Route::post('/modules', [App\Http\Controllers\ModuleController::class, 'createModule']);
+Route::get('/modules/{id}/download', [App\Http\Controllers\ModuleController::class, 'downloadModule']);
