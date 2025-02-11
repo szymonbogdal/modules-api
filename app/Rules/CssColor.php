@@ -14,14 +14,16 @@ class CssColor implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $colorRegex = '/^'.
+        $colorRegex = '/^' .
             // Hex
             '(#(?:[a-fA-F\d]{3,4}|[a-fA-F\d]{6}|[a-fA-F\d]{8})$)|' .
-            // RGB / RGBA
-            '(rgba?\(\s*(\d{1,3}%?|100%)\s*(?:,\s*|\s+)(\d{1,3}%?|100%)\s*(?:,\s*|\s+)(\d{1,3}%?|100%)' .
+            // RGB / RGBA (0-255 or 0%-100%)
+            '(rgba?\(\s*(?:\d{1,2}|1\d{2}|2[0-4]\d|25[0-5]|100%)\s*(?:,\s*|\s+)' .
+            '(?:\d{1,2}|1\d{2}|2[0-4]\d|25[0-5]|100%)\s*(?:,\s*|\s+)' .
+            '(?:\d{1,2}|1\d{2}|2[0-4]\d|25[0-5]|100%)' .
             '(?:\s*(?:,\s*|\s+)(0|1|0?\.\d+))?\s*\)$)|' .
-            // HSL / HSLA
-            '(hsla?\(\s*(-?\d+deg|-?\d+rad|-?\d+grad|-?\d+turn|\d+)\s*(?:,\s*|\s+)(\d{1,3}%?)\s*(?:,\s*|\s+)(\d{1,3}%?)' .
+            // HSL / HSLA (Hue can be any integer, S & L must be 0-100%)
+            '(hsla?\(\s*(-?\d+)\s*(?:,\s*|\s+)(100|[1-9]?\d)%\s*(?:,\s*|\s+)(100|[1-9]?\d)%' .
             '(?:\s*(?:,\s*|\s+)(0|1|0?\.\d+))?\s*\)$)|' .
             // Named values
             '(transparent|inherit|initial|unset)$' .
